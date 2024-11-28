@@ -59,7 +59,7 @@ public final class FloaterMain {
 	}
 
 	private static void showCommandLineSyntax() {
-		System.out.println("Floater (esoteric programming language) v1.1 by Zom-B");
+		System.out.println("Floater (esoteric programming language) v1.2 by Zom-B");
 		System.out.println("https://github.com/Zom-B/Floater");
 		System.out.println("http://esolangs.org/wiki/Floater");
 		System.out.println();
