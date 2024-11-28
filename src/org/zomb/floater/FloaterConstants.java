@@ -62,7 +62,7 @@ public enum FloaterConstants {
 	static final int ADDRESS_START = 1;
 
 	public static final String[] DIRECTIONS = {"Down", "Right", "Up", "Left"};
-	public static final String[] RUNSTATES = {"Running", "Paused", "Halted"};
+	public static final String[] RUNSTATES  = {"Running", "Paused", "Halted"};
 
 	private static final int STEPS_UNTIL_DUPLICATE = 6;
 
@@ -72,7 +72,7 @@ public enum FloaterConstants {
 
 	public static int smaller(int x) {
 		return x <= STEPS_UNTIL_DUPLICATE ?
-				STEPS_UNTIL_DUPLICATE :
-				x - (1 << Integer.bitCount(Integer.highestOneBit(x / (STEPS_UNTIL_DUPLICATE + 1)) - 1));
+		       STEPS_UNTIL_DUPLICATE :
+		       x - (1 << Integer.bitCount(Integer.highestOneBit(x / (STEPS_UNTIL_DUPLICATE + 1)) - 1));
 	}
 }

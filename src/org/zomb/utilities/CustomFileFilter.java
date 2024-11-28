@@ -1,10 +1,10 @@
 package org.zomb.utilities;
 
-import javax.swing.filechooser.FileFilter;
 import java.io.File;
+import javax.swing.filechooser.FileFilter;
 
 public class CustomFileFilter extends FileFilter implements java.io.FileFilter {
-	private final String description;
+	private final String   description;
 	private final String[] extensions;
 
 	public CustomFileFilter(String description, String... extensions) {
@@ -18,11 +18,12 @@ public class CustomFileFilter extends FileFilter implements java.io.FileFilter {
 
 	@Override
 	public boolean accept(File f) {
-		if (f.isDirectory())
+		if (f.isDirectory()) {
 			return true;
+		}
 
-		String s = f.getName();
-		int i = s.lastIndexOf('.');
+		String s         = f.getName();
+		int    i         = s.lastIndexOf('.');
 		String extension = i > 0 ? s.substring(i + 1).toLowerCase() : "";
 
 		for (String wantedExt : extensions) {

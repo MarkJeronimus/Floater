@@ -1,13 +1,18 @@
 package org.zomb.utilities;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
 import javax.swing.table.AbstractTableModel;
-import java.util.*;
 
 // Created 2005-08-07
 public class MutableTableModel extends AbstractTableModel implements List<Object[]> {
-	private ArrayList<Object[]> tableData = new ArrayList<>();
-	private String[] tableColumnNames;
-	private boolean[] editable;
+	private       ArrayList<Object[]> tableData = new ArrayList<>();
+	private final String[]            tableColumnNames;
+	private final boolean[]           editable;
 
 	public MutableTableModel(String[] tableColumnNames) {
 		super();

@@ -17,8 +17,12 @@
 
 package org.zomb.floater;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import javax.imageio.ImageIO;
-import java.io.*;
 
 /**
  * @author Zom-B
@@ -31,8 +35,9 @@ public enum FloaterMain {
 	;
 
 	public static void main(String... args) throws IOException {
-		if (args.length == 0)
+		if (args.length == 0) {
 			showCommandLineSyntax();
+		}
 
 		File inFile = new File(args[0]);
 

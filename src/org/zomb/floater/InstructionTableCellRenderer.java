@@ -17,10 +17,14 @@
 
 package org.zomb.floater;
 
-import javax.swing.*;
-import javax.swing.table.TableCellRenderer;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JTable;
+import javax.swing.table.TableCellRenderer;
 
 /**
  * @author Zom-B
@@ -31,8 +35,8 @@ import java.awt.image.BufferedImage;
 @SuppressWarnings("AssignmentToStaticFieldFromInstanceMethod")
 public class InstructionTableCellRenderer extends JLabel implements TableCellRenderer {
 	private static BufferedImage img = null;
-	private static Graphics2D g = null;
-	private static ImageIcon icon;
+	private static Graphics2D    g   = null;
+	private static ImageIcon     icon;
 
 	public InstructionTableCellRenderer() {
 		// Ensure that the background is visible
@@ -42,25 +46,27 @@ public class InstructionTableCellRenderer extends JLabel implements TableCellRen
 	@Override
 	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
 	                                               int row, int column) {
-		Instruction instruction = (Instruction) value;
+		Instruction instruction = (Instruction)value;
 
-		int width = table.getColumnModel().getColumn(column).getWidth();
+		int width  = table.getColumnModel().getColumn(column).getWidth();
 		int height = table.getRowHeight(row);
 
 		if (img == null || img.getWidth() != width || img.getHeight() != height) {
 			img = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 			icon = new ImageIcon(img);
 
-			if (g != null)
+			if (g != null) {
 				g.dispose();
+			}
 			g = img.createGraphics();
 		}
 
 		g.setPaint(Color.BLACK);
 		g.fillRect(0, 0, width, height);
 		g.setPaint(new Color(FloaterConstants.DOS16[instruction.opcode]));
-		for (int i = 0; i <= instruction.param; i++)
+		for (int i = 0; i <= instruction.param; i++) {
 			g.fillRect(i * height, 0, height - 1, height - 1);
+		}
 
 		g.setPaint(instruction.opcode < 7 || instruction.opcode == 8 ? Color.WHITE : Color.BLACK);
 		g.drawString(instruction.opcode < 2 ? "~" : Integer.toString(instruction.param + 1), 4, height / 2 + 5);

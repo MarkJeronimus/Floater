@@ -1,8 +1,10 @@
 package org.zomb.utilities;
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Paint;
 import java.awt.image.BufferedImage;
+import javax.swing.JComponent;
 
 /**
  * @deprecated Unsafe, confusing, and no real advantage to using images manually.
@@ -13,10 +15,10 @@ import java.awt.image.BufferedImage;
 @Deprecated
 @SuppressWarnings("PublicField")
 public abstract class PixelPanel extends JComponent {
-	private PixelImage image = null;    // null means uninitialized.
-	private Graphics panelG = null;
-	public Graphics2D g = null;
-	public int[] pixels = null;
+	private PixelImage image  = null;    // null means uninitialized.
+	private Graphics   panelG = null;
+	public  Graphics2D g      = null;
+	public  int[]      pixels = null;
 
 	public PixelPanel() {
 		setFocusable(true); // Disabled by default. Allows keyboard listeners.
@@ -38,8 +40,6 @@ public abstract class PixelPanel extends JComponent {
 
 	/**
 	 * Clears the buffer with the specified paint or color.
-	 *
-	 * @param color
 	 */
 	public synchronized void clear(Paint color) {
 		image.clear(color);
@@ -47,8 +47,6 @@ public abstract class PixelPanel extends JComponent {
 
 	/**
 	 * Clears the buffer with the specified RGB triple.
-	 *
-	 * @param rgb
 	 */
 	public synchronized void clear(int rgb) {
 		image.clear(rgb);
@@ -56,8 +54,6 @@ public abstract class PixelPanel extends JComponent {
 
 	/**
 	 * Clears the buffer with the specified background image. The image will be tiled starting at the upper-left.
-	 *
-	 * @param bgtx
 	 */
 	public synchronized void clear(BufferedImage bgtx) {
 		image.clear(bgtx);
@@ -66,11 +62,10 @@ public abstract class PixelPanel extends JComponent {
 	/**
 	 * Fills a rectangular area between (x0, y0) inclusive and (x1, y1) exclusive.
 	 *
-	 * @param x0    the left side (inclusive)
-	 * @param y0    the top side (inclusive)
-	 * @param x1    the right side (exclusive)
-	 * @param y1    the bottom side (exclusive)
-	 * @param color
+	 * @param x0 the left side (inclusive)
+	 * @param y0 the top side (inclusive)
+	 * @param x1 the right side (exclusive)
+	 * @param y1 the bottom side (exclusive)
 	 */
 	public void fillRect(int x0, int y0, int x1, int y1, int color) {
 		image.fillRect(x0, y0, x1, y1, color);

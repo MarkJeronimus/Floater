@@ -17,7 +17,7 @@
 
 package org.zomb.floater;
 
-import java.awt.*;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Arrays;
@@ -51,8 +51,8 @@ public class FloaterInterpreter {
 	int sp;
 
 	// Configuration.
-	private int ioMode;
-	private int gfxMode;
+	private int    ioMode;
+	private int    gfxMode;
 	private double logFactor;
 	private double angFactor;
 
@@ -104,8 +104,10 @@ public class FloaterInterpreter {
 		direction = decodeDirection(color);
 	}
 
-	@SuppressWarnings({"SwitchStatementWithoutDefaultBranch", "NestedSwitchStatement", "SwitchStatementDensity",
-			"TooBroadScope"})
+	@SuppressWarnings({"SwitchStatementWithoutDefaultBranch",
+	                   "NestedSwitchStatement",
+	                   "SwitchStatementDensity",
+	                   "TooBroadScope"})
 	public void execute() {
 		// Halted?
 		if (dir == -1) {
@@ -344,10 +346,11 @@ public class FloaterInterpreter {
 					case 1: // FORWARD
 						break;
 					case 2: // ROTATE
-						if (direction)
+						if (direction) {
 							dir = dir + 1 & 3;
-						else
+						} else {
 							dir = dir + 3 & 3;
+						}
 						break;
 				}
 				break;
@@ -393,11 +396,14 @@ public class FloaterInterpreter {
 
 	private int decodeParam(int color) {
 		// Prepare.
-		for (int y = 0; y < img.getHeight(); y++)
+		for (int y = 0; y < img.getHeight(); y++) {
 			Arrays.fill(flooded[y], 0);
+		}
 
 		// No param.
-		if (color == 0) return 0;
+		if (color == 0) {
+			return 0;
+		}
 
 		// Prevent previous codel area from contributing to the param.
 		if (getRawPixel(ipx - (1 - Math.abs(1 - dir)), ipy - (Math.abs(2 - dir) - 1)) == color) {
@@ -409,14 +415,16 @@ public class FloaterInterpreter {
 			{ // go right-hand-side
 				int xs = xb;
 				int ys = yb;
-				int x = ipx;
-				int y = ipy;
+				int x  = ipx;
+				int y  = ipy;
 				while (true) {
 					xs -= Math.abs(2 - dir) - 1;
 					ys += 1 - Math.abs(1 - dir);
 					x -= Math.abs(2 - dir) - 1;
 					y += 1 - Math.abs(1 - dir);
-					if (getRawPixel(xs, ys) != color || getRawPixel(x, y) != color) break;
+					if (getRawPixel(xs, ys) != color || getRawPixel(x, y) != color) {
+						break;
+					}
 
 					flooded[ys][xs] = -1;
 				}
@@ -425,14 +433,16 @@ public class FloaterInterpreter {
 			{ // go left-hand-side
 				int xs = xb;
 				int ys = yb;
-				int x = ipx;
-				int y = ipy;
+				int x  = ipx;
+				int y  = ipy;
 				while (true) {
 					xs += Math.abs(2 - dir) - 1;
 					ys -= 1 - Math.abs(1 - dir);
 					x += Math.abs(2 - dir) - 1;
 					y -= 1 - Math.abs(1 - dir);
-					if (getRawPixel(xs, ys) != color || getRawPixel(x, y) != color) break;
+					if (getRawPixel(xs, ys) != color || getRawPixel(x, y) != color) {
+						break;
+					}
 
 					flooded[ys][xs] = -1;
 				}
@@ -449,14 +459,16 @@ public class FloaterInterpreter {
 			{ // go right-hand-side
 				int xs = xb;
 				int ys = yb;
-				int x = ipx;
-				int y = ipy;
+				int x  = ipx;
+				int y  = ipy;
 				while (true) {
 					xs -= Math.abs(2 - dir) - 1;
 					ys += 1 - Math.abs(1 - dir);
 					x -= Math.abs(2 - dir) - 1;
 					y += 1 - Math.abs(1 - dir);
-					if (getRawPixel(xs, ys) != color || getRawPixel(x, y) != color) break;
+					if (getRawPixel(xs, ys) != color || getRawPixel(x, y) != color) {
+						break;
+					}
 
 					flooded[ys][xs] = -1;
 				}
@@ -465,14 +477,16 @@ public class FloaterInterpreter {
 			{ // go left-hand-side
 				int xs = xb;
 				int ys = yb;
-				int x = ipx;
-				int y = ipy;
+				int x  = ipx;
+				int y  = ipy;
 				while (true) {
 					xs += Math.abs(2 - dir) - 1;
 					ys -= 1 - Math.abs(1 - dir);
 					x += Math.abs(2 - dir) - 1;
 					y -= 1 - Math.abs(1 - dir);
-					if (getRawPixel(xs, ys) != color || getRawPixel(x, y) != color) break;
+					if (getRawPixel(xs, ys) != color || getRawPixel(x, y) != color) {
+						break;
+					}
 
 					flooded[ys][xs] = -1;
 				}
@@ -495,14 +509,18 @@ public class FloaterInterpreter {
 		flooded[y][x] = area;
 
 		// Handle the four wind directions.
-		if (y > 0)
+		if (y > 0) {
 			area = floodFill(opcode, area, x, y - 1);
-		if (x > 0)
+		}
+		if (x > 0) {
 			area = floodFill(opcode, area, x - 1, y);
-		if (x < img.getWidth() - 1)
+		}
+		if (x < img.getWidth() - 1) {
 			area = floodFill(opcode, area, x + 1, y);
-		if (y < img.getHeight() - 1)
+		}
+		if (y < img.getHeight() - 1) {
 			area = floodFill(opcode, area, x, y + 1);
+		}
 
 		return area;
 	}
@@ -515,16 +533,18 @@ public class FloaterInterpreter {
 		sp++;
 
 		// Expand memory if necessary.
-		if (sp == mem.length)
+		if (sp == mem.length) {
 			mem = Arrays.copyOf(mem, mem.length * 2);
+		}
 
 		mem[sp] = param;
 	}
 
 	public double pop() {
 		// Bounds check.
-		if (sp < 0)
+		if (sp < 0) {
 			return 0;
+		}
 
 		double result = mem[sp];
 		sp--;
@@ -532,39 +552,46 @@ public class FloaterInterpreter {
 	}
 
 	public void set(double addressDouble, double value) {
-		int address = (int) Math.round(addressDouble);
+		int address = (int)Math.round(addressDouble);
 
 		// Relative-to-stack addressing.
-		if (address < 0)
+		if (address < 0) {
 			address = sp + address + 1 + FloaterConstants.ADDRESS_START;
+		}
 
 		// Bounds check.
-		if (address < 0 || address > sp) return;
+		if (address < 0 || address > sp) {
+			return;
+		}
 
 		mem[address] = value;
 	}
 
 	public double get(double addressDouble) {
-		int address = (int) Math.round(addressDouble);
+		int address = (int)Math.round(addressDouble);
 
 		// Relative-to-stack addressing.
-		if (address < 0)
+		if (address < 0) {
 			address = sp + address + FloaterConstants.ADDRESS_START;
+		}
 
 		// Bounds check.
-		if (address < 0 || address > sp)
+		if (address < 0 || address > sp) {
 			return 0;
+		}
 
 		return mem[address];
 	}
 
 	@SuppressWarnings("SwitchStatementWithoutDefaultBranch")
 	public void setPixel(double xd, double yd, double colorDouble) {
-		int x = (int) Math.round(xd);
-		int y = (int) Math.round(yd);
+		int x = (int)Math.round(xd);
+		int y = (int)Math.round(yd);
 
 		// Bounds check.
-		if (x < 0 || y < 0) return;
+		if (x < 0 || y < 0) {
+			return;
+		}
 
 		// Enlarge when necessary.
 		int w = img.getWidth();
@@ -578,7 +605,7 @@ public class FloaterInterpreter {
 			}
 
 			BufferedImage newImg = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
-			Graphics2D g = newImg.createGraphics();
+			Graphics2D    g      = newImg.createGraphics();
 			g.drawImage(this.img, 0, 0, null);
 			g.dispose();
 
@@ -593,36 +620,36 @@ public class FloaterInterpreter {
 
 		switch (gfxMode) {
 			case 0: // DOS16
-				color = Math.floorMod((int) Math.floor(colorDouble), 16);
+				color = Math.floorMod((int)Math.floor(colorDouble), 16);
 				img.setRGB(x, y, FloaterConstants.DOS16[color]);
 				break;
 			case 1: // Float GRAYSCALE
-				color = (int) Math.round(Math.max(0, Math.min(1, colorDouble)) * 255);
+				color = (int)Math.round(Math.max(0, Math.min(1, colorDouble)) * 255);
 				img.setRGB(x, y, color * 0x10101);
 				break;
 			case 2: // 6BPP
-				color = Math.floorMod((int) Math.floor(colorDouble), 64);
+				color = Math.floorMod((int)Math.floor(colorDouble), 64);
 				red = color >> 4;
 				grn = color >> 2 & 3;
 				blu = color & 3;
 				img.setRGB(x, y, ((red << 8 | grn) << 8 | blu) << 6);
 				break;
 			case 3: // 12BPP
-				color = Math.floorMod((int) Math.floor(colorDouble), 4096);
+				color = Math.floorMod((int)Math.floor(colorDouble), 4096);
 				red = color >> 8;
 				grn = color >> 4 & 15;
 				blu = color & 15;
 				img.setRGB(x, y, ((red << 8 | grn) << 8 | blu) << 4);
 				break;
 			case 4: // 18BPP
-				color = Math.floorMod((int) Math.floor(colorDouble), 262144);
+				color = Math.floorMod((int)Math.floor(colorDouble), 262144);
 				red = color >> 12;
 				grn = color >> 6 & 63;
 				blu = color & 63;
 				img.setRGB(x, y, ((red << 8 | grn) << 8 | blu) << 2);
 				break;
 			case 5: // 24BPP
-				color = Math.floorMod((int) Math.floor(colorDouble), 16777216);
+				color = Math.floorMod((int)Math.floor(colorDouble), 16777216);
 				img.setRGB(x, y, color);
 				break;
 		}
@@ -631,8 +658,8 @@ public class FloaterInterpreter {
 	@SuppressWarnings("SwitchStatementWithoutDefaultBranch")
 	public double getPixel(double xd, double yd) {
 
-		int x = (int) Math.round(xd);
-		int y = (int) Math.round(yd);
+		int x = (int)Math.round(xd);
+		int y = (int)Math.round(yd);
 
 		// Bounds check.
 		if (x < 0 || y < 0 || x >= img.getWidth() || y >= img.getHeight()) {
@@ -694,11 +721,11 @@ public class FloaterInterpreter {
 	private void print(double value) {
 		switch (ioMode) {
 			case 0: // Character
-				System.out.write((int) Math.round(value));
+				System.out.write((int)Math.round(value));
 				System.out.flush();
 				break;
 			case 2: // Float
-				System.out.print(Double.toString(value));
+				System.out.print(value);
 				break;
 			case 1: // Integer
 				System.out.print(toLong(value));
@@ -707,11 +734,11 @@ public class FloaterInterpreter {
 	}
 
 	private static double modulo(double numerator, double denominator) {
-		return numerator - (int) Math.floor(numerator / denominator) * denominator;
+		return numerator - (int)Math.floor(numerator / denominator) * denominator;
 	}
 
 	private static int toInt(double value) {
-		return (int) Math.round(value);
+		return (int)Math.round(value);
 	}
 
 	private static long toLong(double value) {
