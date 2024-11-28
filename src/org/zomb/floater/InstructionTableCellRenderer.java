@@ -28,8 +28,6 @@ import javax.swing.table.TableCellRenderer;
 
 /**
  * @author Zom-B
- * @version 1.0
- * @since 1.0
  */
 // Created 2014-03-17
 @SuppressWarnings("AssignmentToStaticFieldFromInstanceMethod")

@@ -25,8 +25,6 @@ import java.util.Random;
 
 /**
  * @author Zom-B
- * @version 1.0
- * @since 1.0
  */
 // Created 2014-03-14
 public class FloaterInterpreter {
@@ -104,9 +102,9 @@ public class FloaterInterpreter {
 		direction = decodeDirection(color);
 	}
 
-	@SuppressWarnings({"SwitchStatementWithoutDefaultBranch",
-	                   "NestedSwitchStatement",
+	@SuppressWarnings({"NestedSwitchStatement",
 	                   "SwitchStatementDensity",
+	                   "SwitchStatementWithoutDefaultBranch",
 	                   "TooBroadScope"})
 	public void execute() {
 		// Halted?
@@ -706,9 +704,9 @@ public class FloaterInterpreter {
 			switch (ioMode) {
 				case 0: // Character
 					return System.in.read();
-				case 2: // Float
-					break;
 				case 1: // Integer
+					break;
+				case 2: // Float
 					break;
 			}
 		} catch (IOException ignored) {
@@ -724,17 +722,13 @@ public class FloaterInterpreter {
 				System.out.write((int)Math.round(value));
 				System.out.flush();
 				break;
-			case 2: // Float
-				System.out.print(value);
-				break;
 			case 1: // Integer
 				System.out.print(toLong(value));
 				break;
+			case 2: // Float
+				System.out.print(value);
+				break;
 		}
-	}
-
-	private static double modulo(double numerator, double denominator) {
-		return numerator - (int)Math.floor(numerator / denominator) * denominator;
 	}
 
 	private static int toInt(double value) {

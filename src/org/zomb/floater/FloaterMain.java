@@ -26,14 +26,10 @@ import javax.imageio.ImageIO;
 
 /**
  * @author Zom-B
- * @version 1.1
- * @since 1.0
  */
 // Created 2014-03-28
-@SuppressWarnings({"UseOfSystemOutOrSystemErr", "CallToSystemExit"})
-public enum FloaterMain {
-	;
-
+@SuppressWarnings({"CallToSystemExit", "UseOfSystemOutOrSystemErr"})
+public final class FloaterMain {
 	public static void main(String... args) throws IOException {
 		if (args.length == 0) {
 			showCommandLineSyntax();

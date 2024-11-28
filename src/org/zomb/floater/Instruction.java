@@ -19,8 +19,6 @@ package org.zomb.floater;
 
 /**
  * @author Zom-B
- * @version 1.1
- * @since 1.0
  */
 // Created 2005-11-29
 // Renamed and simplified 2016-08-08

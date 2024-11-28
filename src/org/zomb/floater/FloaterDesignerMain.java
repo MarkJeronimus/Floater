@@ -85,8 +85,6 @@ import org.zomb.utilities.PixelPanel;
 
 /**
  * @author Zom-B
- * @version 1.1
- * @since 1.0
  */
 // Created 2014-03-17
 // Changed 2016-08-08 Bugfix 1.1 VK_DOWN caused wrap depending on image width
@@ -949,8 +947,8 @@ public class FloaterDesignerMain extends JFrame
 
 	private void updateStatus() {
 		StringBuilder status = new StringBuilder(64);
-		status.append("IP: (").append(vm.ipx + FloaterConstants.ADDRESS_START).append(", ")
-		      .append(vm.ipy + FloaterConstants.ADDRESS_START).append(") ");
+		status.append("IP: (").append(vm.ipx + FloaterConstants.ADDRESS_START);
+		status.append(", ").append(vm.ipy + FloaterConstants.ADDRESS_START).append(") ");
 		status.append(FloaterConstants.DIRECTIONS[vm.dir]);
 		status.append("\nInstruction: ");
 
@@ -974,8 +972,8 @@ public class FloaterDesignerMain extends JFrame
 			}
 		}
 
-		status.append("\nX: ").append(mouseX + FloaterConstants.ADDRESS_START)
-		      .append(", Y: ").append(mouseY + FloaterConstants.ADDRESS_START);
+		status.append("\nX: ").append(mouseX + FloaterConstants.ADDRESS_START);
+		status.append(", Y: ").append(mouseY + FloaterConstants.ADDRESS_START);
 
 		statusArea.setText(status.toString());
 	}

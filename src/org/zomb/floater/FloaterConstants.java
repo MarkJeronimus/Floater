@@ -19,13 +19,9 @@ package org.zomb.floater;
 
 /**
  * @author Zom-B
- * @version 1.1
- * @since 1.0
  */
 // Created 2014-03-17
-public enum FloaterConstants {
-	;
-
+public final class FloaterConstants {
 	// Mnemonics for all instructions.
 	public static final String[][] INSTRUCTIONS = {
 			{"NOP"},                                  // 0
@@ -52,12 +48,14 @@ public enum FloaterConstants {
 			0x555555, 0x5555FF, 0x55FF55, 0x55FFFF,
 			0xFF5555, 0xFF55FF, 0xFFFF55, 0xFFFFFF};
 
-	// The table that translates pre-processed color to opcode.
+	// The table that translates pre-processed "RGB222" color to opcode.
+	// @formatter:off
 	public static final int[] REV_DOS16 = {
-			0, 1, 1, 9, 2, 3, 1, 9, 2, 2, 3, 11, 10, 10, 11, 11,
-			4, 5, 1, 9, 6, 8, 1, 9, 2, 2, 3, 11, 10, 10, 11, 11,
-			4, 4, 5, 13, 6, 4, 5, 13, 6, 6, 7, 15, 14, 14, 15, 15,
-			12, 12, 13, 13, 12, 12, 13, 13, 14, 14, 15, 15, 14, 14, 15, 15};
+			 0,  1,  1,  9,   2,  3,  1,  9,    2,  2,  3, 11,  10, 10, 11, 11,
+			 4,  5,  1,  9,   6,  8,  1,  9,    2,  2,  3, 11,  10, 10, 11, 11,
+			 4,  4,  5, 13,   6,  4,  5, 13,    6,  6,  7, 15,  14, 14, 15, 15,
+			12, 12, 13, 13,  12, 12, 13, 13,   14, 14, 15, 15,  14, 14, 15, 15};
+	// @formatter:on
 
 	static final int ADDRESS_START = 1;
 
