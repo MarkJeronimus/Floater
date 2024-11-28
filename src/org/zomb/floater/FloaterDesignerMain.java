@@ -963,7 +963,7 @@ public class FloaterDesignerMain extends JFrame
 				if (vm.opcode == 1) {
 					status.append(' ');
 					status.append(vm.param);
-					if (vm.param >= 32 && vm.param <= 127) {
+					if (vm.param >= 32 && vm.param < 127) {
 						status.append(" \"");
 						status.append((char)vm.param);
 						status.append('"');
@@ -992,7 +992,7 @@ public class FloaterDesignerMain extends JFrame
 			long   longValue = Math.round(value);
 
 			StringBuilder text = new StringBuilder(20);
-			if (longValue >= 32 && longValue <= 127) {
+			if (longValue >= 32 && longValue < 127) {
 				text.append('"').append((char)longValue).append("\" ");
 			}
 
