@@ -33,7 +33,7 @@ public final class FloaterConstants {
 			{"EQ", "LT", "GT", "SIGN"},               // 6
 			{"PRINT", "INPUT", "IOMODE"},             // 7
 			{"SET PIXEL", "GET PIXEL", "GFXMODE"},    // 8
-			{"RND", "PUSH IP", "PUSH SP"},            // 9
+			{"ZERO", "PUSH IP", "PUSH SP", "RND"},    // 9
 			{"ROUND", "FLOOR", "CEIL", "TRUNC"},      // A
 			{"ADD", "SUB", "MUL", "DIV"},             // B
 			{"SQRT", "POW", "EXP", "LOG", "LOGBASE"}, // C

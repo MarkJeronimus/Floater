@@ -232,8 +232,8 @@ public class FloaterInterpreter {
 				break;
 			case 0x9:
 				switch (param) {
-					case 1: // RND
-						push(RND.nextDouble());
+					case 1: // ZERO
+						push(0);
 						break;
 					case 2: // PUSH IP
 						push(ipx + FloaterConstants.ADDRESS_START);
@@ -241,6 +241,9 @@ public class FloaterInterpreter {
 						break;
 					case 3: // PUSH SP
 						push(sp + FloaterConstants.ADDRESS_START);
+						break;
+					case 4: // RND
+						push(RND.nextDouble());
 						break;
 				}
 				break;
