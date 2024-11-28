@@ -217,7 +217,7 @@ public class FloaterInterpreter {
 						pop1 = pop() - FloaterConstants.ADDRESS_START; // Y
 						pop2 = pop() - FloaterConstants.ADDRESS_START; // X
 						pop3 = pop();
-						setPixel(pop2, pop1, pop3);
+						setPixel(pop2, pop1, pop3, false);
 						break;
 					case 2: // GET PIXEL
 						pop1 = pop() - FloaterConstants.ADDRESS_START; // Y
@@ -582,7 +582,7 @@ public class FloaterInterpreter {
 	}
 
 	@SuppressWarnings("SwitchStatementWithoutDefaultBranch")
-	public void setPixel(double xd, double yd, double colorDouble) {
+	public void setPixel(double xd, double yd, double colorDouble, boolean gfxOverride) {
 		int x = (int)Math.round(xd);
 		int y = (int)Math.round(yd);
 
@@ -616,7 +616,7 @@ public class FloaterInterpreter {
 		int grn;
 		int blu;
 
-		switch (gfxMode) {
+		switch (gfxOverride ? 0 : gfxMode) {
 			case 0: // DOS16
 				color = Math.floorMod((int)Math.floor(colorDouble), 16);
 				img.setRGB(x, y, FloaterConstants.DOS16[color]);

@@ -582,12 +582,12 @@ public class FloaterDesignerMain extends JFrame
 						}
 					} else {
 						modified |= selectedInstruction != color;
-						vm.setPixel(mouseX, mouseY, selectedInstruction);
+						vm.setPixel(mouseX, mouseY, selectedInstruction, true);
 						vm.fetch();
 					}
 				} else if (mouseButton == MouseEvent.BUTTON3) {
 					modified |= vm.getPixel(mouseX, mouseY) != 0;
-					vm.setPixel(mouseX, mouseY, 0);
+					vm.setPixel(mouseX, mouseY, 0, true);
 					vm.fetch();
 				}
 			}
